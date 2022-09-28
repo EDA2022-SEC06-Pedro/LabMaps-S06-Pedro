@@ -114,7 +114,13 @@ def printBooksbyTitle(books):
     """
     Completar la descripcion de printBooksbyTitle
     """
-    pass
+    if (books):
+        print('Total de libros encontrados: ' + str(lt.size(books['books'])))
+        for book in lt.iterator(books['books']):
+            print('Titulo: ' + book['title'] + '  ISBN: ' + book['isbn'])
+        print("\n")
+    else:
+        print('No se encontro el autor.\n')
 
 # Menu de opciones
 
@@ -127,6 +133,7 @@ def printMenu():
     print("4- Consultar los libros de un autor")
     print("5- Consultar los Libros por etiqueta")
     # TODO lab 6, agregar la opcion nueva del menu
+    print("6- Consultar los Libros por Titulo")
     print("0- Salir")
 
 
@@ -146,7 +153,7 @@ while True:
         print('Libros cargados: ' + str(controller.booksSize(ctrlr)))
         print('Autores cargados: ' + str(controller.authorsSize(ctrlr)))
         print('Géneros cargados: ' + str(controller.tagsSize(ctrlr)))
-
+        print('Titulos cargados: ' + str(controller.titlesSize(ctrlr)))
     elif int(inputs[0]) == 3:
         number = input("Buscando libros del año?: ")
         books = controller.getBooksYear(ctrlr, int(number))
@@ -158,15 +165,17 @@ while True:
         printAuthorData(authorinfo)
 
     elif int(inputs[0]) == 5:
-        label = input("Etiqueta a buscar: ")
+        label = input("Etiqueta a busca1r: ")
         books = controller.getBooksByTag(ctrlr, label)
         printBooksbyTag(books)
 
     elif int(inputs[0]) == 6:
+        title =input("Titulo del libro: ")
         # TODO lab 6, conectar con las funciones del controlador e imprimir
         # controller.getBooksByTitle(ctrlr, title)
         # controller.titleSize(ctrlr)
-        pass
+        books = controller.getBooksByTitle(ctrlr, title)
+        printBooksbyTitle (books)
 
     elif int(inputs[0]) == 0:
         break
